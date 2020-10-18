@@ -14,6 +14,7 @@ export default function App(){
   const [show, setShow] = useState(false);
   const [isSwift, setSwift] = useState(true);
   const [isEUCountry, setEUCountry] = useState(false);
+  const [currency, setCurrency] = useState();
 
   const openModal = () => setShow(true);
   const closeModal = () => setShow(false);
@@ -24,9 +25,11 @@ export default function App(){
       switch (props.target.value) {
         case 'GER':
           setEUCountry(false);
+          setCurrency('EUR');
           break;
         case 'UK':
           setEUCountry(true);
+          setCurrency('GBP');
           break;
         default:
           break;
@@ -42,7 +45,7 @@ export default function App(){
         <Modal.Body>
           <Form>
             <Form.Group as={Row}>
-              <Form.Group as={Col}>
+              <Form.Group as={Col} className='flexComp'>
                 <Form.Label size = "lg">
                   Banking Information
                 </Form.Label>
@@ -54,8 +57,9 @@ export default function App(){
                   Once you submit you bank information, we'll verify
                   you information before we start sending any payout there.
                 </Form.Text>
+                <div className='spaceFill'></div>
               </Form.Group>
-              <Form.Group as={Col}>
+              <Form.Group as={Col}className='flexComp'>
                 {isSwift?<Form.Label>Bank Country</Form.Label>:null}
                 {isSwift?<Form.Control as="select" defaultValue="" onChange = {selectCountry}>
                   <option value = 'GER' >Germany</option>
@@ -66,21 +70,23 @@ export default function App(){
                   <ToggleButton value='SWIFT' variant="success" >SWIFT</ToggleButton>
                   <ToggleButton value='IBAN' variant="success" >IBAN</ToggleButton>
                 </ToggleButtonGroup><br/>
+                <div className='spaceFill'></div>
                 <Form.Label>SWIFT</Form.Label>
                 <Form.Control />
                 {isSwift?<Form.Label>Account Number</Form.Label>:null}
                 {isSwift?<Form.Control />:null}
               </Form.Group>
-              <Form.Group as={Col} class="d-flex bd-highlight mb-3">
+              <Form.Group as={Col} className='flexComp'>
                 {isSwift?<Form.Label>Currency</Form.Label>:null}
-                {isSwift?<Form.Control as="select" class="mr-auto p-2 bd-highlight">
+                {isSwift?<Form.Control as="select" value = {currency}>
                   <option>EUR</option>
                   <option>GBP</option>
                 </Form.Control>:null}
-                {isEUCountry?<Form.Label>Rounting Number</Form.Label>:null}
-                {isEUCountry?<Form.Control/>:null}
+                <div className='spaceFill'></div>
+                {isSwift && isEUCountry?<Form.Label>Rounting Number</Form.Label>:null}
+                {isSwift && isEUCountry?<Form.Control/>:null}
                 {isSwift?<Form.Label>Confirm Account Number</Form.Label>:<Form.Label>Currency</Form.Label>}
-                {isSwift?<Form.Control/>:<Form.Control as="select" class="mr-auto p-2 bd-highlight">
+                {isSwift?<Form.Control/>:<Form.Control as="select" value = {currency}>
                   <option>EUR</option>
                   <option>GBP</option>
                 </Form.Control>}

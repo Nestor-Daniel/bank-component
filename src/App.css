@@ -37,3 +37,13 @@
   background-color: lightGray;
   border-color: lightGray
 }
+
+.flexComp {
+  display: flex;
+  flex-flow: column;
+}
+
+.spaceFill {
+  flex-flow: column;
+  flex: 1;
+}
