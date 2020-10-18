@@ -13,11 +13,25 @@ import './App.css';
 export default function App(){
   const [show, setShow] = useState(false);
   const [isSwift, setSwift] = useState(true);
+  const [isEUCountry, setEUCountry] = useState(false);
 
   const openModal = () => setShow(true);
   const closeModal = () => setShow(false);
-  const swiftAccount = () => setSwift(true);
-  const ibanAccount = () => setSwift(false);
+  const setAccount = (value) => {
+    value === 'SWIFT' ? setSwift(true) : setSwift(false)
+    };
+  const selectCountry = (props) => {
+      switch (props.target.value) {
+        case 'GER':
+          setEUCountry(false);
+          break;
+        case 'UK':
+          setEUCountry(true);
+          break;
+        default:
+          break;
+      }
+  }
 
   return (
     <div className = 'App-header'>
@@ -42,29 +56,34 @@ export default function App(){
                 </Form.Text>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Bank Country</Form.Label>
-                <Form.Control as="select" defaultValue="">
-                  <option>Germany</option>
-                  <option>United Kingdom</option>
-                </Form.Control>
+                {isSwift?<Form.Label>Bank Country</Form.Label>:null}
+                {isSwift?<Form.Control as="select" defaultValue="" onChange = {selectCountry}>
+                  <option value = 'GER' >Germany</option>
+                  <option value = 'UK' >United Kingdom</option>
+                </Form.Control>:null}
                 <Form.Label>Select Method</Form.Label><br/>
-                <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
-                  <ToggleButton value={1} variant="success" >SWIFT</ToggleButton>
-                  <ToggleButton value={2} variant="success" >IBAN</ToggleButton>
+                <ToggleButtonGroup type="radio" name="options" defaultValue='SWIFT' onChange={setAccount}>
+                  <ToggleButton value='SWIFT' variant="success" >SWIFT</ToggleButton>
+                  <ToggleButton value='IBAN' variant="success" >IBAN</ToggleButton>
                 </ToggleButtonGroup><br/>
                 <Form.Label>SWIFT</Form.Label>
                 <Form.Control />
-                <Form.Label>Account Number</Form.Label>
-                <Form.Control />
+                {isSwift?<Form.Label>Account Number</Form.Label>:null}
+                {isSwift?<Form.Control />:null}
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Currency</Form.Label>
-                <Form.Control as="select" defaultValue="">
+              <Form.Group as={Col} class="d-flex bd-highlight mb-3">
+                {isSwift?<Form.Label>Currency</Form.Label>:null}
+                {isSwift?<Form.Control as="select" class="mr-auto p-2 bd-highlight">
                   <option>EUR</option>
                   <option>GBP</option>
-                </Form.Control>
-                <Form.Label>Confirm Account Number</Form.Label>
-                <Form.Control />
+                </Form.Control>:null}
+                {isEUCountry?<Form.Label>Rounting Number</Form.Label>:null}
+                {isEUCountry?<Form.Control/>:null}
+                {isSwift?<Form.Label>Confirm Account Number</Form.Label>:<Form.Label>Currency</Form.Label>}
+                {isSwift?<Form.Control/>:<Form.Control as="select" class="mr-auto p-2 bd-highlight">
+                  <option>EUR</option>
+                  <option>GBP</option>
+                </Form.Control>}
               </Form.Group>
             </Form.Group>
           </Form>
