@@ -13,9 +13,9 @@ import './App.css';
 export default function App(){
   const [show, setShow] = useState(false);
   const [isSwift, setSwift] = useState(true);
-  const [isEUCountry, setEUCountry] = useState(false);
+  const [isEUCountry, setEUCountry] = useState(true);
   const [currency, setCurrency] = useState();
-  const [country, setCountry] = useState();
+  const [country, setCountry] = useState('UK');
 
   const openModal = () => setShow(true);
   const closeModal = () => setShow(false);
@@ -74,16 +74,17 @@ export default function App(){
                 </Form.Text><br/>
                 {country==='GER'?<Form.Label>When will I get paid?</Form.Label>:null}
                 {country==='GER'?<Form.Text>
-                  We need to collect this Information to send
-                  payments to you on your employer's behalf.
+                  Due to your bank country and currency, payments from your employer
+                  will take X business days to complete. You will receive funds X
+                  days after your pay day.
                 </Form.Text>:null}
                 <div className='spaceFill'></div>
               </Form.Group>
               <Form.Group as={Col} className='flexComp'>
                 {isSwift?<Form.Label>Bank Country</Form.Label>:null}
                 {isSwift?<Form.Control as="select" value = {country} onChange = {selectCountry}>
-                  <option value = 'GER' >Germany</option>
                   <option value = 'UK' >United Kingdom</option>
+                  <option value = 'GER' >Germany</option>
                 </Form.Control>:null}<br/>
                 <Form.Label>Select Method</Form.Label><br/>
                 <ToggleButtonGroup type="radio" name="options" defaultValue='SWIFT' onChange={setAccount}>
