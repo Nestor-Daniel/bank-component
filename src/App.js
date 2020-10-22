@@ -57,7 +57,7 @@ export default function App(){
       <Modal show={show} onHide={closeModal} size="lg">
         <Modal.Header closeButton>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className = 'sofiaBody'>
           <Form>
             <Form.Group as={Row}>
               <Form.Group as={Col} className='flexComp'>
