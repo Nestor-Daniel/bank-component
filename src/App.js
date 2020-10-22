@@ -61,7 +61,7 @@ export default function App(){
           <Form>
             <Form.Group as={Row}>
               <Form.Group as={Col} className='flexComp'>
-                <Form.Label size = "lg">
+                <Form.Label size = "lg" className = 'sofiaHeader'>
                   Banking Information
                 </Form.Label>
                 <Form.Text>

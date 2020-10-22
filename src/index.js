@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './SofiaPro/stylesheet.css';
 import App from './App';
 
 ReactDOM.render(
